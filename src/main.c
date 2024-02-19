@@ -27,7 +27,6 @@ SDL_Cursor *arrowCursor = NULL;
 
 void Init()
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("SDL AUDIO PLAYER", WINDOW_W, WINDOW_H, 0);
     renderer = SDL_CreateRenderer(window, NULL, SDL_RENDERER_PRESENTVSYNC);
     handCursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
@@ -152,7 +151,6 @@ void Quit()
     TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
     SDL_Quit();
 }
 
