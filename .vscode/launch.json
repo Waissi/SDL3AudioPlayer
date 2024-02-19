@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug C",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/debug/SdlAudioPlayer",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "debug_build"
+        }
+    ]
+}

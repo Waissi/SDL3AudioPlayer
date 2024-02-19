@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "scripts/release_build.sh; bin/release/SdlAudioPlayer"
+        },
+        {
+            "label": "debug_build",
+            "type": "shell",
+            "command": "scripts/debug_build.sh"
+        }
+    ]
+}
