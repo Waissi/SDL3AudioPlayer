@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "sdl.h": "c",
-        "audioplayer.h": "c",
-        "sdl_image.h": "c"
-    }
-}
