@@ -194,7 +194,7 @@ static void SDLCALL BusCallback(void *bus, SDL_AudioStream *stream, int addition
 
     Uint8 mixBuffer[additionalAmount];
     SDL_memset(mixBuffer, '\0', additionalAmount);
-    if (SDL_MixAudioFormat(mixBuffer, copiedSamples, SDL_AUDIO_S16, additionalAmount, SDL_min(currentBus->currentVolume, SDL_MIX_MAXVOLUME)) != 0)
+    if (SDL_MixAudioFormat(mixBuffer, copiedSamples, SDL_AUDIO_S16, additionalAmount, SDL_min(currentBus->currentVolume, 128)) != 0)
     {
         SDL_Log("Error mixing the bus samples %s", SDL_GetError());
     }
@@ -227,8 +227,8 @@ struct AudioBus *AudioPlayer_NewBus()
     headBus = newBusNode;
 
     newAudioBus->stream = stream;
-    newAudioBus->volume = SDL_MIX_MAXVOLUME;
-    newAudioBus->currentVolume = SDL_MIX_MAXVOLUME;
+    newAudioBus->volume = 128;
+    newAudioBus->currentVolume = 128;
     newAudioBus->headClip = NULL;
     return newAudioBus;
 }

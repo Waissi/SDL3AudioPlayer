@@ -28,7 +28,7 @@ SDL_Cursor *arrowCursor = NULL;
 void Init()
 {
     window = SDL_CreateWindow("SDL AUDIO PLAYER", WINDOW_W, WINDOW_H, 0);
-    renderer = SDL_CreateRenderer(window, NULL, SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, NULL, 0);
     handCursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
     arrowCursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW);
 
@@ -52,8 +52,9 @@ void Init()
     TTF_CloseFont(font);
 }
 
-SDL_bool CheckEvents()
+int CheckEvents()
 {
+    Uint32 buttons;
     while (SDL_PollEvent(&event) != 0)
     {
         switch (event.type)
@@ -61,7 +62,7 @@ SDL_bool CheckEvents()
         case SDL_EVENT_QUIT:
             return SDL_FALSE;
         case SDL_EVENT_MOUSE_BUTTON_DOWN:
-            Uint32 buttons = SDL_GetMouseState(&mouseX, &mouseY);
+            buttons = SDL_GetMouseState(&mouseX, &mouseY);
             if ((buttons & SDL_BUTTON_LMASK) == 0)
             {
                 break;
@@ -96,7 +97,7 @@ SDL_bool CheckEvents()
 
 void Update()
 {
-    SDL_bool isHoovering = SDL_FALSE;
+    int isHoovering = SDL_FALSE;
     SDL_GetMouseState(&mouseX, &mouseY);
     if (CheckMousePositionOnClipPanel(musicPanel, mouseX, mouseY) == SDL_TRUE)
     {
@@ -130,7 +131,7 @@ void Draw()
 
 void Loop()
 {
-    SDL_bool running = SDL_TRUE;
+    int running = SDL_TRUE;
     while (running == SDL_TRUE)
     {
         running = CheckEvents();
