@@ -2,7 +2,7 @@
 
 struct Button *NewButton(SDL_Renderer *renderer, const char *path)
 {
-    struct Button *newButton = SDL_malloc(sizeof(struct Button));
+    struct Button *newButton = (struct Button *)SDL_malloc(sizeof(struct Button));
     newButton->image = NewImageFromFile(renderer, path);
     newButton->width = newButton->image->rect.w;
     newButton->height = newButton->image->rect.h;
