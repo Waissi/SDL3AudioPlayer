@@ -206,7 +206,7 @@ static void SDLCALL BusCallback(void *bus, SDL_AudioStream *stream, int addition
 
 struct AudioBus *AudioPlayer_NewBus()
 {
-    struct AudioBus *newAudioBus = (struct AudioBus *)SDL_malloc(sizeof(struct AudioBus));
+    struct AudioBus *newAudioBus = SDL_malloc(sizeof(struct AudioBus));
     SDL_AudioStream *stream = SDL_OpenAudioDeviceStream(audioDeviceId, &audioSpec, BusCallback, newAudioBus);
     if (!stream)
     {
@@ -221,7 +221,7 @@ struct AudioBus *AudioPlayer_NewBus()
         return NULL;
     }
 
-    struct BusNode *newBusNode = (struct BusNode *)SDL_malloc(sizeof(struct BusNode));
+    struct BusNode *newBusNode = SDL_malloc(sizeof(struct BusNode));
     newBusNode->bus = newAudioBus;
     newBusNode->next = headBus;
     headBus = newBusNode;
@@ -235,7 +235,7 @@ struct AudioBus *AudioPlayer_NewBus()
 
 struct AudioClip *AudioPlayer_NewAudioClip(struct AudioBus *bus, const char *path)
 {
-    struct AudioClip *newAudioClip = (struct AudioClip *)SDL_malloc(sizeof(struct AudioClip));
+    struct AudioClip *newAudioClip = SDL_malloc(sizeof(struct AudioClip));
     if (SDL_LoadWAV(path, &newAudioClip->spec, &newAudioClip->wavBuffer, &newAudioClip->wavLength) != 0)
     {
         SDL_free(newAudioClip);
@@ -257,7 +257,7 @@ struct AudioClip *AudioPlayer_NewAudioClip(struct AudioBus *bus, const char *pat
     newAudioClip->audioLength = 0;
     newAudioClip->state = STOP;
     newAudioClip->loop = SDL_FALSE;
-    struct ClipNode *newClipNode = (struct ClipNode *)SDL_malloc(sizeof(struct ClipNode));
+    struct ClipNode *newClipNode = SDL_malloc(sizeof(struct ClipNode));
     newClipNode->clip = newAudioClip;
     newClipNode->next = bus->headClip;
     bus->headClip = newClipNode;

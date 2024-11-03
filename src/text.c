@@ -9,11 +9,11 @@ struct Text *NewText(SDL_Renderer *renderer, TTF_Font *font, const char *text, S
         return NULL;
     }
 
-    struct Text *newText = (struct Text *)SDL_malloc(sizeof(struct Text));
-    newText->renderer = renderer;
-    newText->texture = SDL_CreateTextureFromSurface(renderer, surface);
     int width, height;
     TTF_SizeText(font, text, &width, &height);
+    struct Text *newText = SDL_malloc(sizeof(struct Text));
+    newText->texture = SDL_CreateTextureFromSurface(renderer, surface);
+    newText->renderer = renderer;
     newText->rect.x = 0;
     newText->rect.y = 0;
     newText->rect.w = width;

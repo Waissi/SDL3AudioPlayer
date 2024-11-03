@@ -2,9 +2,9 @@
 
 struct ClipPanel *NewClipPanel(SDL_Renderer *renderer, struct AudioClip *clip, TTF_Font *font, const char *title, SDL_Rect rect)
 {
-    struct ClipPanel *newClipPanel = (struct ClipPanel *)SDL_malloc(sizeof(struct ClipPanel));
+    struct ClipPanel *newClipPanel = SDL_malloc(sizeof(struct ClipPanel));
     newClipPanel->renderer = renderer;
-    newClipPanel->rect = (SDL_FRect *)SDL_malloc(sizeof(SDL_FRect));
+    newClipPanel->rect = SDL_malloc(sizeof(SDL_FRect));
     newClipPanel->rect->x = rect.x;
     newClipPanel->rect->y = rect.y;
     newClipPanel->rect->w = rect.w;

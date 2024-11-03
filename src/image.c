@@ -2,16 +2,16 @@
 
 struct Image *NewImageFromFile(SDL_Renderer *renderer, const char *path)
 {
-    int width, height;
-    struct Image *newImage = (struct Image *)SDL_malloc(sizeof(struct Image));
-    newImage->renderer = renderer;
-    newImage->texture = IMG_LoadTexture(renderer, path);
-    if (!newImage->texture)
+    SDL_Texture *texture = IMG_LoadTexture(renderer, path);
+    if (!texture)
     {
         SDL_Log("Could not create texture for Image %s", SDL_GetError());
         return NULL;
     }
-    SDL_QueryTexture(newImage->texture, NULL, NULL, &width, &height);
+    int width, height;
+    SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+    struct Image *newImage = SDL_malloc(sizeof(struct Image));
+    newImage->renderer = renderer;
     newImage->rect.x = 0;
     newImage->rect.y = 0;
     newImage->rect.w = width;
