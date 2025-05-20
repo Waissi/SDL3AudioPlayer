@@ -28,7 +28,7 @@ struct AudioClip
     Uint8 *wavBuffer;
     Uint8 *audioPos;
     SDL_AudioSpec spec;
-    SDL_bool loop;
+    bool loop;
     enum TransportState state;
     enum TransportState nextState;
 };
@@ -59,8 +59,8 @@ void AudioPlayer_SetMasterVolume(float volume);
 void AudioPlayer_SetBusVolume(struct AudioBus *, float volume);
 struct AudioBus *AudioPlayer_NewBus();
 
-void AudioPlayer_AudioClipSetLoop(struct AudioClip *clip, SDL_bool shouldLoop);
-SDL_bool AudioPlayer_AudioClipIsPlaying(struct AudioClip *clip);
+void AudioPlayer_AudioClipSetLoop(struct AudioClip *clip, bool shouldLoop);
+bool AudioPlayer_AudioClipIsPlaying(struct AudioClip *clip);
 void AudioPlayer_SetAudioClipPan(struct AudioClip *clip, float pan);
 void AudioPlayer_SetAudioClipVolume(struct AudioClip *clip, float volume);
 void AudioPlayer_PlayAudioClip(struct AudioClip *clip);

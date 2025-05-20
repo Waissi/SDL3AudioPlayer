@@ -2,8 +2,13 @@
 
 struct Button *NewButton(SDL_Renderer *renderer, const char *path)
 {
+    struct Image *image = NewImageFromFile(renderer, path);
+    if (!image)
+    {
+        return NULL;
+    }
     struct Button *newButton = (struct Button *)SDL_malloc(sizeof(struct Button));
-    newButton->image = NewImageFromFile(renderer, path);
+    newButton->image = image;
     newButton->width = newButton->image->rect.w;
     newButton->height = newButton->image->rect.h;
     newButton->x = 0;
@@ -18,14 +23,14 @@ void SetButtonPosition(struct Button *button, int x, int y)
     button->y = y;
 }
 
-SDL_bool CheckMouseClickOnButon(struct Button *button)
+bool CheckMouseClickOnButon(struct Button *button)
 {
     return button->state == HOOVER;
 }
 
-SDL_bool CheckMousePositionOnButton(struct Button *button, float mouseX, float mouseY)
+bool CheckMousePositionOnButton(struct Button *button, float mouseX, float mouseY)
 {
-    SDL_bool isHoovering = ImageIsColliding(button->image, mouseX, mouseY);
+    bool isHoovering = ImageIsColliding(button->image, mouseX, mouseY);
     button->state = isHoovering ? HOOVER : IDLE;
     return isHoovering;
 }

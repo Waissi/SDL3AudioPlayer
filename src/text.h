@@ -1,6 +1,7 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#include <string.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3_image/SDL_image.h>
 
@@ -8,8 +9,6 @@ struct Text
 {
     int x;
     int y;
-    int width;
-    int height;
     SDL_Texture *texture;
     SDL_FRect rect;
     SDL_Renderer *renderer;

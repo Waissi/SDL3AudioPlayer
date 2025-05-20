@@ -12,7 +12,7 @@ struct Image
 
 struct Image *NewImageFromFile(SDL_Renderer *renderer, const char *path);
 void DrawImage(struct Image *image, int x, int y);
-SDL_bool ImageIsColliding(struct Image *image, int x, int y);
+bool ImageIsColliding(struct Image *image, int x, int y);
 void FreeImage(struct Image *);
 
 #endif

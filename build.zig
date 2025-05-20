@@ -41,8 +41,8 @@ pub fn build(b: *std.Build) !void {
     exe.addCSourceFiles(.{ .root = b.path("src"), .files = sources.items, .flags = &.{} });
     exe.linkLibC();
     b.installArtifact(exe);
-    b.installLibFile(libSdlPath, "../bin/libs/libSDL3.1.0.0" ++ extension);
-    b.installLibFile(libSdlImgPath, "../bin/libs/libSDL3_image.1.0.0" ++ extension);
-    b.installLibFile(libSdlTtfPath, "../bin/libs/libSDL3_ttf.1.0.0" ++ extension);
+    b.installLibFile(libSdlPath, "../bin/libs/libSDL3.0" ++ extension);
+    b.installLibFile(libSdlImgPath, "../bin/libs/libSDL3_image.0" ++ extension);
+    b.installLibFile(libSdlTtfPath, "../bin/libs/libSDL3_ttf.0" ++ extension);
     exe.root_module.addRPathSpecial("@executable_path/libs");
 }

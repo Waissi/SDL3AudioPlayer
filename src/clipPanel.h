@@ -26,8 +26,8 @@ struct ClipPanel
 };
 
 struct ClipPanel *NewClipPanel(SDL_Renderer *renderer, struct AudioClip *clip, TTF_Font *font, const char *title, SDL_Rect rect);
-SDL_bool CheckMousePositionOnClipPanel(struct ClipPanel *panel, int mouseX, int mouseY);
-SDL_bool CheckMouseClickOnClipPanel(struct ClipPanel *panel);
+bool CheckMousePositionOnClipPanel(struct ClipPanel *panel, int mouseX, int mouseY);
+bool CheckMouseClickOnClipPanel(struct ClipPanel *panel);
 void DrawClipPanel(struct ClipPanel *panel);
 void FreeClipPanel(struct ClipPanel *panel);
 

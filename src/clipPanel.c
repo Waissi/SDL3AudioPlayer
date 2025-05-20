@@ -30,7 +30,7 @@ struct ClipPanel *NewClipPanel(SDL_Renderer *renderer, struct AudioClip *clip, T
     int panelH = rect.y + rect.h;
     int panelHalfW = rect.x + rect.w / 2;
     int panelHalfH = rect.y + rect.h / 2;
-    SetTextPosition(newClipPanel->titleText, panelHalfW, rect.y + newClipPanel->titleText->height / 2);
+    SetTextPosition(newClipPanel->titleText, panelHalfW, rect.y + newClipPanel->titleText->rect.h / 2);
 
     x = rect.x + newClipPanel->panLeftButton->width / 2;
     y = panelHalfH - rect.h / 8;
@@ -50,91 +50,91 @@ struct ClipPanel *NewClipPanel(SDL_Renderer *renderer, struct AudioClip *clip, T
     return newClipPanel;
 }
 
-SDL_bool CheckMousePositionOnClipPanel(struct ClipPanel *panel, int mouseX, int mouseY)
+bool CheckMousePositionOnClipPanel(struct ClipPanel *panel, int mouseX, int mouseY)
 {
-    SDL_bool isHoovering = SDL_FALSE;
-    if (CheckMousePositionOnButton(panel->playButton, mouseX, mouseY) == SDL_TRUE)
+    bool isHoovering = false;
+    if (CheckMousePositionOnButton(panel->playButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
-    if (CheckMousePositionOnButton(panel->pauseButton, mouseX, mouseY) == SDL_TRUE)
+    if (CheckMousePositionOnButton(panel->pauseButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
-    if (CheckMousePositionOnButton(panel->stopButton, mouseX, mouseY) == SDL_TRUE)
+    if (CheckMousePositionOnButton(panel->stopButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
-    if (CheckMousePositionOnButton(panel->panLeftButton, mouseX, mouseY) == SDL_TRUE)
+    if (CheckMousePositionOnButton(panel->panLeftButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
-    if (CheckMousePositionOnButton(panel->panRightButton, mouseX, mouseY) == SDL_TRUE)
+    if (CheckMousePositionOnButton(panel->panRightButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
-    if (CheckMousePositionOnButton(panel->volDownButton, mouseX, mouseY) == SDL_TRUE)
+    if (CheckMousePositionOnButton(panel->volDownButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
-    if (CheckMousePositionOnButton(panel->volUpButton, mouseX, mouseY) == SDL_TRUE)
+    if (CheckMousePositionOnButton(panel->volUpButton, mouseX, mouseY) == true)
     {
-        isHoovering = SDL_TRUE;
+        isHoovering = true;
     }
     return isHoovering;
 }
 
-SDL_bool CheckMouseClickOnClipPanel(struct ClipPanel *panel)
+bool CheckMouseClickOnClipPanel(struct ClipPanel *panel)
 {
-    if (CheckMouseClickOnButon(panel->playButton) == SDL_TRUE)
+    if (CheckMouseClickOnButon(panel->playButton) == true)
     {
         AudioPlayer_PlayAudioClip(panel->clip);
-        return SDL_TRUE;
+        return true;
     }
-    else if (CheckMouseClickOnButon(panel->pauseButton) == SDL_TRUE)
+    else if (CheckMouseClickOnButon(panel->pauseButton) == true)
     {
         if (AudioPlayer_AudioClipIsPlaying(panel->clip))
         {
             AudioPlayer_PauseAudioClip(panel->clip);
-            return SDL_TRUE;
+            return true;
         }
         AudioPlayer_ResumeAudioClip(panel->clip);
-        return SDL_TRUE;
+        return true;
     }
-    else if (CheckMouseClickOnButon(panel->stopButton) == SDL_TRUE)
+    else if (CheckMouseClickOnButon(panel->stopButton) == true)
     {
         AudioPlayer_StopAudioClip(panel->clip);
-        return SDL_TRUE;
+        return true;
     }
-    else if (CheckMouseClickOnButon(panel->panLeftButton) == SDL_TRUE)
+    else if (CheckMouseClickOnButon(panel->panLeftButton) == true)
     {
         panel->clipPan -= 0.1f;
         panel->clipPan = SDL_clamp(panel->clipPan, -1.0f, 1.0f);
         AudioPlayer_SetAudioClipPan(panel->clip, panel->clipPan);
-        return SDL_TRUE;
+        return true;
     }
-    else if (CheckMouseClickOnButon(panel->panRightButton) == SDL_TRUE)
+    else if (CheckMouseClickOnButon(panel->panRightButton) == true)
     {
         panel->clipPan += 0.1f;
         panel->clipPan = SDL_clamp(panel->clipPan, -1.0f, 1.0f);
         AudioPlayer_SetAudioClipPan(panel->clip, panel->clipPan);
-        return SDL_TRUE;
+        return true;
     }
-    else if (CheckMouseClickOnButon(panel->volDownButton) == SDL_TRUE)
+    else if (CheckMouseClickOnButon(panel->volDownButton) == true)
     {
         panel->clipVolume -= 0.1f;
         panel->clipVolume = SDL_clamp(panel->clipVolume, 0.0f, 1.0f);
         AudioPlayer_SetAudioClipVolume(panel->clip, panel->clipVolume);
-        return SDL_TRUE;
+        return true;
     }
-    else if (CheckMouseClickOnButon(panel->volUpButton) == SDL_TRUE)
+    else if (CheckMouseClickOnButon(panel->volUpButton) == true)
     {
         panel->clipVolume += 0.1f;
         panel->clipVolume = SDL_clamp(panel->clipVolume, 0.0f, 1.0f);
         AudioPlayer_SetAudioClipVolume(panel->clip, panel->clipVolume);
-        return SDL_TRUE;
+        return true;
     }
-    return SDL_FALSE;
+    return false;
 }
 
 void DrawClipPanel(struct ClipPanel *panel)
